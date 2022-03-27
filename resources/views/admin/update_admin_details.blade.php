@@ -36,7 +36,7 @@
          
          <?php
          
-echo $AdminDetails;
+//echo $AdminDetails;
 //  $data =  Session::all();
 //    echo "<pre>";
 //    print_r($data); 
@@ -49,7 +49,7 @@ echo $AdminDetails;
 
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Update Password</h3>
+                  <h3 class="card-title">Update Admin Details</h3>
                 </div>
                
                 <!-- fetch session and show error messsage -->
@@ -76,10 +76,21 @@ echo $AdminDetails;
                 </div>
 
                 @endif
+ 
+                @if ($errors->any())
+                
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="{{route('admin.update-current-pwd')}}" name="updatePasswordForm" id="updatePasswordForm">
+                <form role="form" method="post" action="{{route('admin.update-admin-details')}}" name="updateAdminDetails" id="updateAdminDetails" enctype="multipart/form-data">
                    @csrf
                   <div class="card-body">
                      
@@ -99,21 +110,23 @@ echo $AdminDetails;
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleInputPassword1"> Current Password</label>
-                      <input type="password" name="current_pwd" class="form-control" id="current_pwd" placeholder="Enter Current Password">
-                       <p class="password-notice"></p>
-                    </div>
-                
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">New Password</label>
-                      <input type="password" name="new_pwd" class="form-control" id="new_pwd" placeholder="Password">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1"> Confirm Password</label>
-                      <input type="password" name="confirm_pwd" id="confirm_pwd" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" class="form-control"   name="admin_name" value="{{$AdminDetails->name}}"  >
+                      </div>
+                  
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Mobile</label>
+                        <input type="text" class="form-control"   name="admin_mobile" value="{{auth()->guard('admin')->user()->mobile}}" id="admin_moblie" placeholder="Enter Admin Mobile"  >
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Image</label>
+                        <input type="file" class="form-control"   name="admin_image" id="admin_image"   >
+                     @if(!empty(Auth::guard('admin')->user()->image))
+                       <a target="_blank"  href="{{url('images/admin_images/admin_photos').'/'.Auth::guard('admin')->user()->image}}">View Image</a>
+                       <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}" >
+                     @endif   
+                    </div> 
                
                   </div>
                   <!-- /.card-body -->

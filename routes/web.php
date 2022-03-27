@@ -32,7 +32,9 @@ Route::group(['prefix' => 'admin','as' => 'admin.','namespace' => 'App\Http\Cont
          Route::post('/check-current-pwd',[AdminController::class,'checkCurrentPassword']);
         // Route::post('/update-current-pwd',[AdminController::class,'updateCurrentPassword']);
         Route::post('/update-current-pwd','AdminController@updateCurrentPassword')->name('update-current-pwd');
-   });
+        Route::match(['get','post'],'/update-admin-details','AdminController@updateAdminDetails')->name('update-admin-details');
+  
+    });
 
 
 });
