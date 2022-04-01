@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout.admin_layout')
 
-@section("custom-js")
+@section("custom-jss")
  <script src="{{ url('js/admin_js/admin_script.js') }}" ></script>
 @endsection
 

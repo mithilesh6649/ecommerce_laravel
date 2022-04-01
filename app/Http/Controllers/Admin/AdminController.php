@@ -13,6 +13,7 @@ use Image;
 class AdminController extends Controller
 {
     public function dashboard(){
+         Session::put('page','dashboard');
         return view('admin.admin_dashboard');
     }
 
@@ -52,7 +53,7 @@ class AdminController extends Controller
 
 
   public function settings(){
-       
+    Session::put('page','settings');
      $AdminDetails = Admin::Where('email',Auth::guard('admin')->user()->email)->first();
        
       return view('admin.admin_settings')->with(compact('AdminDetails'));
@@ -112,7 +113,7 @@ class AdminController extends Controller
     //update admin details............
 
     public function updateAdminDetails(Request $request){
-          
+      Session::put('page','update-admin-details');
           if($request->isMethod('post'))
           {
              

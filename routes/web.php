@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'admin','as' => 'admin.','namespace' => 'App\Http\Cont
     Route::match(['get', 'post'],'/',[AdminController::class,'login']); 
    
    Route::group(['middleware' => ['admin']],function(){
+
          Route::get('dashboard',[AdminController::class,'dashboard']);
          Route::get('settings',[AdminController::class,'settings']);
          Route::get('logout',[AdminController::class,'logout']);
@@ -33,7 +35,12 @@ Route::group(['prefix' => 'admin','as' => 'admin.','namespace' => 'App\Http\Cont
         // Route::post('/update-current-pwd',[AdminController::class,'updateCurrentPassword']);
         Route::post('/update-current-pwd','AdminController@updateCurrentPassword')->name('update-current-pwd');
         Route::match(['get','post'],'/update-admin-details','AdminController@updateAdminDetails')->name('update-admin-details');
-  
+         
+       //Sections.......
+       
+       Route::get('sections',[SectionController::class,'sections']);
+    
+       Route::post('update-section-status',[SectionController::class,'updateSectionStatus']);
     });
 
 

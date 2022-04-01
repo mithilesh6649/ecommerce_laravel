@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Dashboard -- @yield('title') </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -24,6 +24,9 @@
   <link rel="stylesheet" href="{{ url('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.css')}}">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}"> 
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -79,6 +82,27 @@
 <script src="{{ url('js/admin_js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('js/admin_js/demo.js')}}"></script>
+<!-- CUSTOM JAVASCRIPT -->
+<script src="{{ url('js/admin_js/admin_script.js') }}" ></script>
+
+<!-- DataTables -->
+<script src="{{ url('plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ url('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<script>
+  $(function () {
+    $("#sections").DataTable({
+      
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
 
 <!-- start custom js -->
 @yield("custom-js");

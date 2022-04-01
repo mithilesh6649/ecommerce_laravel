@@ -38,6 +38,49 @@ $(document).ready(function(){
 
     });
   
+});
+
+//02 - Section Active and Inactive status............
+
+$(document).ready(function(){
+  $('.updateSectionStatus').click(function(){
+    var status = $(this).text();
+    var section_id = $(this).attr('section_id');
+    var usr = window.hostname;
+    
+    $.ajax({
+         type:"post",
+         url:'/admin/update-section-status',
+         data:{
+           status:status,
+           section_id:section_id,
+           _token:$('body').attr('token'),
+         },
+         beforeSend:function(){
+          $("#section-"+section_id).html('<font color="yellow">Processing.....</font>');
+          $("#section-"+section_id).css("pointer-events", "none");
+         },
+         success:function(response){
+          console.log(response);
+         // alert(response['section_id']);
+         // alert(response['status']);
+
+        // console.log($("#section-"+response['section_id']).html());
+        $("#section-"+section_id).css("pointer-events", "auto");
+        if(response['status'] == 0)
+         {
+          $("#section-"+response['section_id']).html('<font color="red">Inactive</font>');
+         }
+         else{
+          $("#section-"+response['section_id']).html('<font color="green">Active</font>');
+         }
+
+         },
+         error:function(){
+          alert('Error');
+         }
+    });
 
 
+  });
 });
